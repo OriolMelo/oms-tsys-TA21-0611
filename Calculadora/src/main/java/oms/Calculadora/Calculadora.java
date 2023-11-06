@@ -201,16 +201,16 @@ public class Calculadora extends JFrame {
         		lblMuestra.setText(dividir());
         		break;
         	case "+/-":
-        		lblMuestra.setText(cambiarSigno());
+        		lblMuestra.setText(cambiarSigno(lblMuestra.getText()));
         		break;
         	case "<-":
-        		lblMuestra.setText(eliminarDigito());
+        		lblMuestra.setText(eliminarDigito(lblMuestra.getText()));
         		break;
         	case "C":
             	lblMuestra.setText(limpiarCalculadora());
         		break;
         	case "=":
-        		lblMuestra.setText(operar());
+        		lblMuestra.setText(operar(operacion, operador1, lblMuestra.getText()));
         		break;
         }
     }
@@ -239,14 +239,14 @@ public class Calculadora extends JFrame {
     	return "/";
     }
 
-    public String cambiarSigno() {
-    	double num_actual = Double.parseDouble(lblMuestra.getText());
+    public String cambiarSigno(String num) {
+    	double num_actual = Double.parseDouble(num);
     	num_actual*=-1;
     	return (String.valueOf(num_actual));
     }
     
-    public String eliminarDigito() {
-    	return (lblMuestra.getText().substring(0, lblMuestra.getText().length()-1));
+    public String eliminarDigito(String num) {
+    	return (num.substring(0, num.length()-1));
     }
 
     public String limpiarCalculadora() {
@@ -256,8 +256,8 @@ public class Calculadora extends JFrame {
     	return "0";
     }
 
-    public String operar() {
-    	operador2 = Double.parseDouble(lblMuestra.getText());
+    public String operar(String operacion, Double operador1, String op2) {
+    	operador2 = Double.parseDouble(op2);
     	String resultado = "";
     	switch(operacion) {
     		case "+":
